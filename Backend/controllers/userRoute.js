@@ -68,8 +68,8 @@ UserRouter.post('/register', async(req, res) => {
       }
   
       // Create and send a JSON Web Token (JWT) for authentication
-      const token = jwt.sign({ userID: user._id,name:user.name },
-         'auth');
+      const token = jwt.sign({ userId: user._id,name:user.name },
+         'auth',{expiresIn:"1hr"});
   
       res.status(200)
       .json({

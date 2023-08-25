@@ -5,6 +5,7 @@ const morgan=require("morgan")
 const { connectDB } = require("./config/db")
 const { UserRouter } = require("./controllers/userRoute")
 const { PostRouter } = require("./controllers/postRoute")
+const { authentication } = require("./Middleware/authentication")
 require('dotenv').config()
 
 
@@ -16,6 +17,7 @@ app.use(express.json())
 
 
 app.use("/user",UserRouter)
+app.use(authentication)
 app.use("/media",PostRouter)
 
 

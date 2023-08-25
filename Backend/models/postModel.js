@@ -6,11 +6,12 @@ const postScheme=new mongoose.Schema({
                ref: 'user', required: true 
             },
     content: { type: String, required: true, maxlength: 300 },
+    name: { type: String },
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },
     likes: { type: Number, default: 0 },
   });
-  
+
 
   const postModel=mongoose.model("post",postScheme)
 
