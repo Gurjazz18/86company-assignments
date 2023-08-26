@@ -180,9 +180,15 @@ PostRouter.post('/create-post', async (req, res) => {
 
    //.................Likes............................................
    PostRouter.post('/posts/:id/like', async (req, res) => {
+    const {id}=req.params
     try {
-      const post = await postModel.findById(req.params.id);
-      if (!post) throw new Error('Post not found');
+      const post = await postModel.findById(id);
+      if (!post) {
+
+        res.send({
+          message:"Post is not Found"
+        })
+      };
       post.likes += 1;
       await post.save();
       res.json({
