@@ -27,7 +27,7 @@ const CreatePost = () => {
    
    
  
-console.log(postData)
+
 
   const handleSubmit=(e)=>{
       e.preventDefault()
@@ -40,8 +40,9 @@ console.log(postData)
              "Authorization":localStorage.getItem("token")
         },
         body:(JSON.stringify(postData))
-      }).then((res)=>res.json()).then((res)=>{ 
-        console.log(res)
+      }).then((res)=>res.json())
+      .then((res)=>{ 
+       
          
         if (res.message === "post is created") {
           toast({
@@ -51,15 +52,22 @@ console.log(postData)
            
           })
           navigate("/")
+        }else{
+
+          toast({
+            title: "post is Large",
+          
+           
+      
+     })
         }
        
       
       
       })
+}
 
 
-      
-  }
 
   const handleChange=(e)=>{
     const {value,name}=e.target
@@ -106,6 +114,6 @@ console.log(postData)
       
     </Center>
   )
-}
+  }
 
 export default CreatePost

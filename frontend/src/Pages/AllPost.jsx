@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from "react-router-dom"
 import { Card, CardBody,Image, CardFooter,Stack,Heading,Text,Center,Button, Divider, ButtonGroup,SimpleGrid, useToast } from '@chakra-ui/react'
+import TopFivePost from './TopFivePost';
 
 const ImageUrl='https://th.bing.com/th/id/OIP.lO7bg6dlJLZ9mWRli0tkAQHaEo?pid=ImgDet&w=474&h=296&rs=1'
 const AllPost = () => {
@@ -16,7 +17,7 @@ const AllPost = () => {
 
        useEffect(()=>{
 
-        fetch(`http://localhost:8080/media/get-posts`,{
+        fetch(`http://localhost:8080/media/analytics/posts`,{
          
           headers:{
             "Authorization":localStorage.getItem("token")
@@ -26,6 +27,7 @@ const AllPost = () => {
          
             console.log(res.posts)
             setTodo(res.posts)
+          
         
         })
   
@@ -65,10 +67,90 @@ const AllPost = () => {
         
        }
 
-       
-     
+       //.......................Likes......................
+
+       const HandleLikes=(id)=>{
+
+
+        fetch(`http://localhost:8080/media/posts/${id}/like`,{
+            method:"POST",
+            headers:{
+               
+                "Authorization":localStorage.getItem("token")
+            },
+           
+          }).then((res)=>res.json())
+          .then((res)=>{ 
+           
+            if (res.message === "likes is Increased") {
+                toast({
+                       title: "likes is Increased",
+                     
+                       status: "success",
+                 
+                })
+                setLoad(prev=>!prev)
+              }
+          
+          })
+          
+
+         
+        
+       }
+
+
+
+       //.......................DisLikes........................
+
+       const HandleDisLikes=(id)=>{
+
+
+        fetch(`http://localhost:8080/media/posts/${id}/unlike`,{
+            method:"POST",
+            headers:{
+               
+                "Authorization":localStorage.getItem("token")
+            },
+           
+          }).then((res)=>res.json())
+          .then((res)=>{ 
+           
+            if(res.likes>=0){
+                
+            if (res.message === "Likes is Decreased") {
+                toast({
+                       title: "Likes is Decreased",
+                     
+                       status: "success",
+                 
+                })
+                setLoad(prev=>!prev)
+              }
+            }else{
+
+                toast({
+                    title: "You Cannot DisLike Now",
+                  
+                    
+                   })
+                    
+                   setLoad(prev=>!prev)
+            }
+
+
+          
+          })
+          
+
+         
+        
+       }
+
        
 
+
+       //......................Auth.............................
       
        if(!localStorage.getItem("token")){
 
@@ -81,6 +163,14 @@ const AllPost = () => {
       
   
   return (
+    <>
+       
+      <Center>
+        <Button textAlign={'center'} colorScheme='messenger' variant='link'>
+            <Link to='/topfivepost'>Top 5 Post</Link>
+        </Button>
+      </Center>
+
     <SimpleGrid spacing={4} templateColumns='repeat(3,1fr)' p={5}>
 
 
@@ -116,13 +206,18 @@ const AllPost = () => {
                               >
                                  <Link to={`/${elem._id}`}>Update</Link>
                             </Button>
-                            <Button variant='solid' colorScheme='blue' onClick={()=>Handledelete(elem._id)}>
+                            <Button variant='solid' 
+                            colorScheme='blue'
+                             onClick={()=>Handledelete(elem._id)}>
                                 Delete
                             </Button>
-                            <Button variant='solid' colorScheme='blue'>
+                            <Button variant='solid' colorScheme='blue'
+                              onClick={()=>HandleLikes(elem._id)}>
                                 Likes
                             </Button>
-                            <Button variant='solid' colorScheme='blue'>
+                            <Button variant='solid' colorScheme='blue' 
+                             onClick={()=>HandleDisLikes(elem._id)}
+                               >
                                Dislikes
                             </Button>
                             </ButtonGroup>
@@ -137,10 +232,13 @@ const AllPost = () => {
       
 
      
- 
+  
 
    
     </SimpleGrid>
+
+    
+    </>
   )
 }
 

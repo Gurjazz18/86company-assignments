@@ -116,10 +116,11 @@ import { useNavigate } from 'react-router-dom';
           <FormControl id="userName" isRequired>
             <FormLabel>User name</FormLabel>
             <Input
-              placeholder="UserName"
               autoComplete="off"
+              placeholder="UserName"
+            
               type="text"
-              required 
+              aria-required="true"
               value={state.name}
               onChange={handleChanege}
               name="name"
