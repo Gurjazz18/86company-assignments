@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link,  useNavigate } from 'react-router-dom'
 import { Flex } from '@chakra-ui/react';
+import { AppContext } from '../Pages/ContextApi';
 
 const Navbar = () => {
+  const{logoutUser}=useContext(AppContext)
   
  
   const handleLogout=()=>{
         
-
-       localStorage.clear()
+      logoutUser()
+     
        
        
   }
@@ -19,7 +21,7 @@ const Navbar = () => {
     color={'white'}
     fontWeight={'medium'} 
     p={3}  textTransform='uppercase'>
-     <Link to="/">AllPost</Link>
+     <Link to="/">Home</Link>
      <Link to="/users">AllUsers</Link>
      <Link to="/createPost">CreatePost</Link>
     <Link to="/login">Login</Link>
