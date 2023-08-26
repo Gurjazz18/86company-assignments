@@ -11,7 +11,7 @@ const SingleUser = () => {
     const[load,setLoad]=useState(false)
     useEffect(()=>{
 
-        fetch(`http://localhost:8080/user/get-by-id/${user_id}`)
+        fetch(`https://eight6app-0xzc.onrender.com/user/get-by-id/${user_id}`)
         .then((res)=>res.json())
         .then((res)=>{ 
          

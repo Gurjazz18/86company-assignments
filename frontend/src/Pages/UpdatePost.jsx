@@ -34,7 +34,7 @@ console.log(postData)
       e.preventDefault()
 
 
-      fetch(`http://localhost:8080/media/post-update/${id}`,{
+      fetch(`https://eight6app-0xzc.onrender.com/media/post-update/${id}`,{
         method:"PUT",
         headers:{
             "Content-type":"application/json",

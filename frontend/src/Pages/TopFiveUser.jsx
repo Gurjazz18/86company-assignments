@@ -13,7 +13,7 @@ const TopFiveUser = () => {
    
     useEffect(()=>{
 
-        fetch(`http://localhost:8080/user/analytics/users/top-active`)
+        fetch(`https://eight6app-0xzc.onrender.com/user/analytics/users/top-active`)
         .then((res)=>res.json())
         .then((res)=>{ 
          

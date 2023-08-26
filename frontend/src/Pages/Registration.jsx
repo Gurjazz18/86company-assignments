@@ -34,7 +34,7 @@ import { useNavigate } from 'react-router-dom';
      
        
       
-      await axios("http://localhost:8080/user/register", {
+      await axios("https://eight6app-0xzc.onrender.com/user/register", {
         method: "POST",
         data: state,
         headers: {

@@ -33,7 +33,7 @@ const CreatePost = () => {
       e.preventDefault()
 
 
-      fetch(`http://localhost:8080/media/create-post`,{
+      fetch(`https://eight6app-0xzc.onrender.com/media/create-post`,{
         method:"POST",
         headers:{
             "Content-type":"application/json",

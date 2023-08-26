@@ -19,7 +19,7 @@ const AllUsers = () => {
     const[load,setLoad]=useState(false)
     useEffect(()=>{
 
-        fetch(`http://localhost:8080/user/analytics/users`)
+        fetch(`https://eight6app-0xzc.onrender.com/user/analytics/users`)
         .then((res)=>res.json())
         .then((res)=>{ 
          

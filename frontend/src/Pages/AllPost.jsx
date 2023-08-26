@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from "react-router-dom"
 import { Card, CardBody,Image, CardFooter,Stack,Heading,Text,Center,Button, Divider, ButtonGroup,SimpleGrid, useToast } from '@chakra-ui/react'
-import TopFivePost from './TopFivePost';
+
 
 const ImageUrl='https://th.bing.com/th/id/OIP.lO7bg6dlJLZ9mWRli0tkAQHaEo?pid=ImgDet&w=474&h=296&rs=1'
 const AllPost = () => {
@@ -17,7 +17,7 @@ const AllPost = () => {
 
        useEffect(()=>{
 
-        fetch(`http://localhost:8080/media/analytics/posts`,{
+        fetch(`https://eight6app-0xzc.onrender.com/media/analytics/posts`,{
          
           headers:{
             "Authorization":localStorage.getItem("token")
@@ -40,7 +40,7 @@ const AllPost = () => {
        const Handledelete=(id)=>{
 
 
-        fetch(`http://localhost:8080/media/post-delete/${id}`,{
+        fetch(`https://eight6app-0xzc.onrender.com/media/post-delete/${id}`,{
             method:"DELETE",
             headers:{
                
@@ -72,7 +72,7 @@ const AllPost = () => {
        const HandleLikes=(id)=>{
 
 
-        fetch(`http://localhost:8080/media/posts/${id}/like`,{
+        fetch(`https://eight6app-0xzc.onrender.com/media/posts/${id}/like`,{
             method:"POST",
             headers:{
                
@@ -106,7 +106,7 @@ const AllPost = () => {
        const HandleDisLikes=(id)=>{
 
 
-        fetch(`http://localhost:8080/media/posts/${id}/unlike`,{
+        fetch(`https://eight6app-0xzc.onrender.com/media/posts/${id}/unlike`,{
             method:"POST",
             headers:{
                

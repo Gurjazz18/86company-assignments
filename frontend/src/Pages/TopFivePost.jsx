@@ -13,7 +13,7 @@ const TopFivePost = () => {
    
     useEffect(()=>{
 
-        fetch(`http://localhost:8080/media/analytics/posts/top-liked`,{
+        fetch(`https://eight6app-0xzc.onrender.com/media/analytics/posts/top-liked`,{
          
         headers:{
           "Authorization":localStorage.getItem("token")
