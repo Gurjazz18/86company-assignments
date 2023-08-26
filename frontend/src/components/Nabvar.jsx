@@ -25,7 +25,7 @@ const Navbar = () => {
      <Link to="/users">AllUsers</Link>
      <Link to="/createPost">CreatePost</Link>
     <Link to="/login">Login</Link>
-    <Link to="/register">SingUp</Link>
+    <Link to="/register">SignUp</Link>
     <Link to="/login" onClick={handleLogout}>Logout</Link>
 
       

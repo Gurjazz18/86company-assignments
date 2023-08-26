@@ -3,13 +3,13 @@ import React, { createContext, useState } from "react";
 export const AppContext = createContext();
 
 function AppContextProvider({ children }) {
- const[state,setsate]=useState({
+ const[state,setState]=useState({
     isAuth:false,
     token:null
  })
 
  const loginUser=(token)=>{
-    setsate({
+    setState({
         ...state,
          isAuth:true,
          token
@@ -17,7 +17,7 @@ function AppContextProvider({ children }) {
  }
 
  const logoutUser=()=>{
-    setsate({
+    setState({
         ...state,
         isAuth:false,
         token:null
