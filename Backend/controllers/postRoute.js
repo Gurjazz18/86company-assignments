@@ -34,7 +34,7 @@ PostRouter.post('/create-post', async (req, res) => {
 
   //..................AllPost.......................................
 
-  PostRouter.get('/get-posts/', async (req, res) => {
+  PostRouter.get('/analytics/posts', async (req, res) => {
   
     try {
       const posts = await postModel.find();
@@ -177,6 +177,56 @@ PostRouter.post('/create-post', async (req, res) => {
   
    })
 
+
+   //.................Likes............................................
+   PostRouter.post('/posts/:id/like', async (req, res) => {
+    try {
+      const post = await postModel.findById(req.params.id);
+      if (!post) throw new Error('Post not found');
+      post.likes += 1;
+      await post.save();
+      res.json({
+        message:"likes is Increased",
+        post
+      });
+    } catch (error) {
+      res.status(404).json({ error: error.message });
+    }
+  });
+
+
+  //........................DisLikes...........................
+
+  PostRouter.post('/posts/:id/unlike', async (req, res) => {
+    try {
+      const post = await postModel.findById(req.params.id);
+      if (!post) throw new Error('Post not found');
+      post.likes = Math.max(post.likes - 1, 0);
+      await post.save();
+      res.json({
+        message:"Likes is Decreased",
+        post
+      });
+    } catch (error) {
+      res.status(404).json({ error: error.message });
+    }
+  });
+
+
+  //....................Top-5-Post.......................
+
+
+  PostRouter.get('/analytics/posts/top-liked', async (req, res) => {
+    try {
+      const topLikedPosts = await postModel.find().sort('-likes').limit(5);
+      res.status(201).json({
+        message:"Top 5 Post",
+        topLikedPosts
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
 
 

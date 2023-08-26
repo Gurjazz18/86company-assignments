@@ -3,6 +3,7 @@ const { UserModel } = require("../models/userModel");
 const express=require("express")
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+const { postModel } = require("../models/postModel");
  
 const UserRouter=express.Router()
 
@@ -93,8 +94,8 @@ UserRouter.post('/register', async(req, res) => {
     const{id}=req.params
 
     try {
-      const user = await UserModel.findById(id);
-      if (!user){
+      const users = await UserModel.findById(id);
+      if (!users){
         res.status(404).json({
             message:'User not found',
             status:false
@@ -103,7 +104,7 @@ UserRouter.post('/register', async(req, res) => {
         res.status(201).json({
             message:"successful",
             status:true,
-            user
+            users
         });
       }
     
@@ -116,6 +117,60 @@ UserRouter.post('/register', async(req, res) => {
   });
 
 
+  //.......................All-Users.....................................
+
+
+ UserRouter.get('/analytics/users', async (req, res) => {
+   
+
+    try {
+      const users = await UserModel.find();
+      if (!users){
+        res.status(404).json({
+            message:'User not found',
+            status:false
+        })
+      }else{
+        res.status(201).json({
+            message:"successful",
+            status:true,
+            users
+        });
+      }
+    
+
+
+    } catch (error) {
+      res.status(404)
+      .json({ message: error.message });
+    }
+  });
+
+  //........................TopActiveUsers.........................
+  UserRouter.get('/analytics/users/top-active', async (req, res) => {
+    try {
+      const topActiveUsers = await postModel.aggregate([
+        { $group: { _id: '$userId', total_posts: { $sum: 1 } } },
+        { $sort: { total_posts: -1 } },
+        { $limit: 5 },
+      ]).exec();
+  
+      const userIds = topActiveUsers.map((user) => user._id);
+    const users = await UserModel.find({ _id: { $in: userIds } })
+    .select('_id name');
+
+    const formattedTopActiveUsers = topActiveUsers.map((user) => {
+      const userData = users.find((u) => u._id.equals(user._id));
+      return { user: userData, total_posts: user.total_posts };
+    });
+  
+      res.json({
+        message:"Top Five Users",
+        formattedTopActiveUsers});
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
 
 
