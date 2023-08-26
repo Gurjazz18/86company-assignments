@@ -38,7 +38,9 @@ const TopFiveUser = () => {
        {
         data.length>0 &&data.map((elem)=>(
 
-           <Card key={elem.user._id}>
+           <Card key={elem.user._id} 
+           border={'2px solid teal'}
+            margin={"10px"}>
 
                 <CardHeader display={'flex'} justifyContent={'space-around'}>
                     <Heading size='md'>{elem.user.name}</Heading>

@@ -31,10 +31,12 @@ const SingleUser = () => {
        {
         data.length>0 &&data.map((elem)=>(
 
-        <Card key={elem._id}>
-    <CardHeader>
-      <Heading size='md'>{elem.name}</Heading>
-    </CardHeader>
+        <Card key={elem._id} border={'2px solid teal'} padding={10}
+         margin={10}>
+
+        <CardHeader color={'blue'}>
+        <Heading size='md'>{elem.name}</Heading>
+        </CardHeader>
   
     <CardBody>
       <Stack divider={<StackDivider />} spacing='4'>

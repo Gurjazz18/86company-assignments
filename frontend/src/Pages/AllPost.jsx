@@ -58,6 +58,14 @@ const AllPost = () => {
                  
                 })
                 setLoad(prev=>!prev)
+              }else{
+
+                toast({
+                    title: "You Are Not Authorized Person",
+                  
+                   
+              
+                 })
               }
           
           })
@@ -155,7 +163,7 @@ const AllPost = () => {
        if(!localStorage.getItem("token")){
 
         return(
-            <Center>
+            <Center p={10}>
                 <Heading>Login Please</Heading>
             </Center>
         )
@@ -165,12 +173,27 @@ const AllPost = () => {
   return (
     <>
        
-      <Center>
-        <Button textAlign={'center'} colorScheme='messenger' variant='link'>
-            <Link to='/topfivepost'>Top 5 Post</Link>
+    {  localStorage.getItem("token")?(<Center p={5}>
+        <Button textAlign={'center'} colorScheme='messenger' >
+            <Link to='/topfivepost'>Click here To show Top 5 Post</Link>
         </Button>
-      </Center>
+        </Center>)
+      :(
+            <Center p={10}>
+            <Button textAlign={'center'} colorScheme='messenger' >
+              <Link to='/login'>Please Login Fisrt</Link> 
+            </Button>
+            </Center>
+        )
+      
+      }
 
+
+    
+
+            <Center p={5}>
+                <Heading>AllPost</Heading>
+            </Center>
     <SimpleGrid spacing={4} templateColumns='repeat(3,1fr)' p={5}>
 
 

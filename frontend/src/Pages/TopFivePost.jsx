@@ -39,11 +39,12 @@ const TopFivePost = () => {
        <Center>
              <Heading>Top 5 Posts</Heading>
        </Center>
+
        {
         data.length>0 &&data.map((elem)=>(
 
-        <Card key={elem._id}>
-    <CardHeader>
+        <Card key={elem._id} border={'2px solid teal'} margin={"10px"}>
+    <CardHeader color='blue'>
       <Heading size='md'>{elem.name}</Heading>
     </CardHeader>
   
@@ -58,10 +59,10 @@ const TopFivePost = () => {
           </Text>
         </Box>
         <Box>
-          <Heading size='xs' textTransform='uppercase'>
+          <Heading size='xs' textTransform='uppercase' color={'green'}>
             Likes
           </Heading>
-          <Text pt='2' fontSize='sm'>
+          <Text pt='2' fontSize='sm' color={'orange.600'}>
             {elem.likes}
           </Text>
         </Box>
@@ -79,6 +80,7 @@ const TopFivePost = () => {
 
         ))
        }
+
 
     </>
   )

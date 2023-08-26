@@ -10,7 +10,8 @@ import {
     TableCaption,
     Center,
     TableContainer,
-    Button
+    Button,
+    Heading
   } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
@@ -33,13 +34,23 @@ const AllUsers = () => {
   return (
 
     <> 
-          
-      <Center>
+     {
+
+             
+      localStorage.getItem("token")?(<Center p={5}>
         <Button textAlign={'center'} colorScheme='messenger' >
               <Link to='/topfiveusers'>To Show Top 5 Users Click on It</Link> 
         </Button>
-      </Center>
-
+      </Center>):(<Center  p={10}>
+        <Button textAlign={'center'} colorScheme='messenger' >
+              <Link to='/login'>Please Login Fisrt</Link> 
+        </Button>
+      </Center>)
+     }
+      
+     <Center p={5}>
+                <Heading>AllUsers List</Heading>
+            </Center>
     <TableContainer>
             <Table variant='striped' colorScheme='teal'>
             

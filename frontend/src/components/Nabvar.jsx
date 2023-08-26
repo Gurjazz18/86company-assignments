@@ -15,7 +15,10 @@ const Navbar = () => {
 
   return (
     <Flex  justifyContent={'space-evenly'} 
-    bgColor={'black'} color={'white'} p={3}>
+    bgColor={'black'} 
+    color={'white'}
+    fontWeight={'medium'} 
+    p={3}  textTransform='uppercase'>
      <Link to="/">AllPost</Link>
      <Link to="/users">AllUsers</Link>
      <Link to="/createPost">CreatePost</Link>
